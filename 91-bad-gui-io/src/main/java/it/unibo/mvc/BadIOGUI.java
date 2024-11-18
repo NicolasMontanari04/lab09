@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
@@ -77,7 +78,16 @@ public class BadIOGUI {
 
         readButton.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e){
-                System.out.println("KRIIIS");
+                
+                try{
+                    final List<String> lines = Files.readAllLines(Paths.get(PATH));
+                    for(final String line: lines){
+                        System.out.println(line);
+                    }
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                }
             }
         });
     }
