@@ -23,15 +23,13 @@ public class Controller {
         return currentFile;
     }
 
-    public String getPath(){
+    public String getCurrentPath(){
         return currentFile.getAbsolutePath();
     }
 
-    public void writeString(final String string){
-        try (PrintStream ps = new PrintStream(getPath(), StandardCharsets.UTF_8)) {
+    public void writeString(final String string) throws IOException{
+        try (PrintStream ps = new PrintStream(getCurrentPath(), StandardCharsets.UTF_8)) {
             ps.print(string);
-        } catch (IOException e1) {
-            throw new IllegalArgumentException("error print file");
-        }
+        } 
     }
 }
