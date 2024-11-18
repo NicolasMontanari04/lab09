@@ -50,6 +50,9 @@ public class BadIOGUI {
         canvas2.setLayout(new BoxLayout(canvas2, BoxLayout.LINE_AXIS));
         canvas.add(canvas2, BorderLayout.CENTER);
         canvas2.add(write, BorderLayout.CENTER);
+
+        JButton readButton = new JButton("READ");
+        canvas2.add(readButton, BorderLayout.CENTER);
         /*
          * Handlers
          */
@@ -69,6 +72,12 @@ public class BadIOGUI {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
+            }
+        });
+
+        readButton.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e){
+                System.out.println("KRIIIS");
             }
         });
     }
@@ -96,6 +105,7 @@ public class BadIOGUI {
          * OK, ready to push the frame onscreen
          */
         frame.setVisible(true);
+        frame.pack();
     }
 
     /**
