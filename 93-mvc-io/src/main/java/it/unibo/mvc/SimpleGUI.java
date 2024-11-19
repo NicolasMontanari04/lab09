@@ -46,6 +46,19 @@ public final class SimpleGUI {
             public void actionPerformed(ActionEvent e) {
                 simpleController.setString(textField.getText());
                 System.out.println(simpleController.getNextString());
+                simpleController.printCurrentString();
+            }
+            
+        });
+
+        show.addActionListener(new ActionListener() {
+            String memory = "";
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for(String string : simpleController.getList()){
+                    memory = memory + "\n" + string;
+                }
+                textArea.setText(memory);
             }
             
         });
