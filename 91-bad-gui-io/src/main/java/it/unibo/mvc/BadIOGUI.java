@@ -52,7 +52,7 @@ public class BadIOGUI {
         canvas.add(canvas2, BorderLayout.CENTER);
         canvas2.add(write, BorderLayout.CENTER);
 
-        JButton readButton = new JButton("READ");
+        final JButton readButton = new JButton("READ");
         canvas2.add(readButton, BorderLayout.CENTER);
         /*
          * Handlers
@@ -77,16 +77,16 @@ public class BadIOGUI {
         });
 
         readButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e){
-                
-                try{
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                try {
                     final List<String> lines = Files.readAllLines(Paths.get(PATH));
-                    for(final String line: lines){
-                        System.out.println(line);
+                    for (final String line: lines) {
+                        System.out.println(line); // NOPMD: allowed as this is just an exercise
                     }
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
+                    e1.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
             }
         });
