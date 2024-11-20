@@ -8,14 +8,14 @@ import java.util.List;
  *
  */
 public final class SimpleController implements Controller {
-    private String current = null;
-    private List<String> listString = new LinkedList<>();
+    private String current;
+    private final List<String> listString = new LinkedList<>();
 
     @Override
-    public void setString(String chars) {
-        if(chars.equals(null)){
-            throw new NullPointerException();
-        }else{
+    public void setString(final String chars) {
+        if (chars == null) {
+            throw new IllegalArgumentException();
+        } else {
             this.current = chars;
         }
     }
@@ -32,12 +32,11 @@ public final class SimpleController implements Controller {
 
     @Override
     public void printCurrentString() {
-        if(this.current.equals(null)){
+        if (this.current == null) {
             throw new IllegalStateException();
-        }else{
+        } else {
             listString.add(current);
         }
-        System.out.println(this.current);
+        System.out.println(this.current); // NOPMD: allowed as this is just an exercise
     }
-
 }

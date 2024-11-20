@@ -20,50 +20,52 @@ import java.awt.event.ActionListener;
 public final class SimpleGUI {
     private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame("MOdel-View-Controller");
-    public SimpleGUI(SimpleController simpleController){
+    /**
+     * build the frame.
+     *
+     * @param simpleController the controller for print in list
+     */
+    public SimpleGUI(final SimpleController simpleController) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         frame.setContentPane(canvas);
-
         final JPanel canvas2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         canvas.add(canvas2, BorderLayout.SOUTH);
-        JTextField textField = new JTextField();
+        final JTextField textField = new JTextField();
         canvas.add(textField, BorderLayout.NORTH);
-
-        JTextArea textArea = new JTextArea();
+        final JTextArea textArea = new JTextArea();
         canvas.add(textArea, BorderLayout.CENTER);
-
-        JButton print = new JButton("PRINT");
+        final JButton print = new JButton("PRINT");
         canvas2.add(print, BorderLayout.CENTER);
-
-        JButton show = new JButton("SHOW HISTORY");
+        final JButton show = new JButton("SHOW HISTORY");
         canvas2.add(show, BorderLayout.CENTER);
 
         print.addActionListener(new ActionListener() {
-
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 simpleController.setString(textField.getText());
-                System.out.println(simpleController.getNextString());
+                System.out.println(simpleController.getNextString()); // NOPMD: allowed as this is just an exercise
                 simpleController.printCurrentString();
-            }
-            
+            } 
         });
 
         show.addActionListener(new ActionListener() {
-            String memory = "";
+            private String memory = "";
             @Override
-            public void actionPerformed(ActionEvent e) {
-                for(String string : simpleController.getList()){
-                    memory = memory + "\n" + string;
+            public void actionPerformed(final ActionEvent e) {
+                for (final String string : simpleController.getList()) {
+                    memory = memory.concat("\n" + string);
                 }
                 textArea.setText(memory);
             }
-            
         });
     }
-    private void display(){
+    /**
+     * Set the dimension of the screen.
+     *
+     */
+    private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
@@ -72,9 +74,13 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /**
+     * main.
+     *
+     * @param args
+     */
+    public static void main(final String[] args) {
         final SimpleGUI gui = new SimpleGUI(new SimpleController());
         gui.display();
     }
-    
 }
